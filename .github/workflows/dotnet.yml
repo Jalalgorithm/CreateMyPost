@@ -13,9 +13,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      api:
+        image: 507501/my-createpost-api-dockerhub
+        ports:
+          - 5000:80
+        
 
     steps:
     - uses: actions/checkout@v4
+    - name: Log in to Docker Hub
+      run: echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{ secrets.DOCKER_USERNAME}}
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -26,3 +34,5 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Clean up Docker login credentials
+      run: docker logout
