@@ -1,5 +1,6 @@
 using CreateMyPost.Application;
 using CreateMyPost.Infrastructure;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,10 @@ builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddMediatR(configuration =>
+//{
+//    configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
+//});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

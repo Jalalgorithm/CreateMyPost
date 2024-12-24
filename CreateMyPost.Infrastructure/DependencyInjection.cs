@@ -1,4 +1,6 @@
-﻿using CreateMyPost.Infrastructure.Data;
+﻿using CreateMyPost.Domain.Repository;
+using CreateMyPost.Infrastructure.Data;
+using CreateMyPost.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,7 @@ namespace CreateMyPost.Infrastructure
                     migration => migration.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
 
+            services.AddScoped<IPostRepo, PostRepo>();
             return services;
         }
     }

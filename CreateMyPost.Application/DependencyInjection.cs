@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CreateMyPost.Domain.Repository;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace CreateMyPost.Application
             {
                 mdr.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
+
+            
             return services;
         }
     }
