@@ -34,9 +34,5 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Apply Database Migrations
-      env:
-          ConnectionStrings__Default: "Server=db11894.public.databaseasp.net; Database=db11894; User Id=db11894; Password=c=7EQa#63?Hg; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"
-      run: dotnet ef database update 
     - name: Clean up Docker login credentials
       run: docker logout
