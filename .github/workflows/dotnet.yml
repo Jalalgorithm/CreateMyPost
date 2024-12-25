@@ -33,7 +33,7 @@ jobs:
     - name: Apply Database Migrations
       env:
           ConnectionStrings__DefaultConnection: "Server=db11894.public.databaseasp.net; Database=db11894; User Id=db11894; Password=c=7EQa#63?Hg; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"
-      run: dotnet ef database update --project src/Infrastructure
+      run: dotnet ef database update --CreateMyPost src/Infrastructure
     - name: Build
       run: dotnet build --no-restore
     - name: Test
