@@ -26,6 +26,7 @@
     <Folder Include="Post\Commands\DeletePost\" />
     <Folder Include="Post\Commands\UpdatePost\" />
     <Folder Include="Post\Handler\GetPostById\" />
+    <Folder Include="User\Query\" />
   </ItemGroup>
 
 </Project>
