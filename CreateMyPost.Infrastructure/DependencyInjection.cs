@@ -1,9 +1,13 @@
-﻿using CreateMyPost.Domain.Repository;
+﻿using CreateMyPost.Domain.Entities;
+using CreateMyPost.Domain.Helpers;
+using CreateMyPost.Domain.Repository;
 using CreateMyPost.Infrastructure.Data;
 using CreateMyPost.Infrastructure.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +28,10 @@ namespace CreateMyPost.Infrastructure
             });
 
             services.AddScoped<IPostRepo, PostRepo>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICurrentService, CurrentUserService>();
+
+
             return services;
         }
     }
