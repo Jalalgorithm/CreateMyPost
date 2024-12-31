@@ -8,9 +8,10 @@ namespace CreateMyPost.Application.Helpers
 {
     public class AppResponse
     {
-        public string ErrorMessage { get; set; }
-        public bool Successful => ErrorMessage == null;
-        public object Result { get; set; }
+        public string Message { get; set; }
+        public int StatusCode { get; set; }
+
+        public string Title { get; set; }
 
     }
 }
