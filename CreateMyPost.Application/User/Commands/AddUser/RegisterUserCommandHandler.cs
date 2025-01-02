@@ -30,7 +30,7 @@ namespace CreateMyPost.Application.User.Commands.AddUser
         public async Task<UserResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await userManager.FindByEmailAsync(request.Email);
-            if(existingUser is null)
+            if(existingUser is not null)
             {
                 throw new InvalidOperationException("Email already exists");
             }
@@ -40,10 +40,11 @@ namespace CreateMyPost.Application.User.Commands.AddUser
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                CreatedAt = DateTime.Now,
+                UserName = GenerateUsername(request.FirstName, request.LastName)
             };
 
-            newUser.UserName = GenerateUsername(request.FirstName, request.LastName);
             var result = await userManager.CreateAsync(newUser, request.Password);
 
             if(!result.Succeeded)
