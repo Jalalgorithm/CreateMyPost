@@ -25,7 +25,14 @@ namespace CreateMyPost.Application.User.Commands.DeleteUser
                 throw new InvalidOperationException("User not found");
             }
 
-            await _userManager.DeleteAsync(user);
+            var result = await _userManager.DeleteAsync(user);
+
+            if(!result.Succeeded) 
+            {
+                throw new InvalidOperationException("Couldnt delete user account");
+            }
+
+            
         }
     }
 }
