@@ -1,5 +1,10 @@
 ﻿using CreateMyPost.Application.User.Commands.AddUser;
+using CreateMyPost.Application.User.Commands.DeleteUser;
 using CreateMyPost.Application.User.Commands.LogInUser;
+using CreateMyPost.Application.User.Commands.RevokeRefreshToken;
+using CreateMyPost.Application.User.Commands.UpdateUser;
+using CreateMyPost.Application.User.Commands.UserRefreshToken;
+using CreateMyPost.Application.User.Query.GetCurrentUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -33,8 +38,43 @@ namespace CreateMyPost.WebAPI.Server.Controllers
             return Ok(response);
         }
 
-        
+        [Authorize]
+        [HttpGet("UserProfile")]
+        public async Task<IActionResult> UserProfile()
+        {
+            var response = await _sender.Send(new GetCurrentUserQuery());
+            return Ok(response);
+        }
 
+        [HttpPut("{id}")]
+        public async Task <IActionResult> UpdateUser(Guid id ,UpdateUserCommand userUpdate)
+        {
+            userUpdate.Id = id; 
+            var response = await _sender.Send(userUpdate);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id , DeleteUserCommand userDelete)
+        {
+            userDelete.Id = id;
+            await _sender.Send(userDelete);
+            return Ok("Account deleted successfully");
+        }
+
+        [HttpDelete("RevokeToken")]
+        public async Task<IActionResult> RevokeToken(RevokeRefreshTokenCommand revokeToken)
+        {
+            var response = await _sender.Send(revokeToken);
+            return Ok(response);
+        }
+
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> GenerateRefreshToken(RefreshTokenCommand refreshToken)
+        {
+            var response = await _sender.Send(refreshToken);
+            return Ok();
+        }
         
     }
 }
