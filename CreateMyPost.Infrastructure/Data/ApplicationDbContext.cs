@@ -17,6 +17,7 @@ namespace CreateMyPost.Infrastructure.Data
             
         }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
